@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# React Router uses client-side routing (BrowserRouter), so Netlify must
+# send every path to index.html and let the app handle routing itself.
+# Without this, refreshing on e.g. /history or /consignment/abc123 gives
+# a Netlify 404 instead of loading the app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

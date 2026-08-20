@@ -1,0 +1,233 @@
+/* ============================================================
+   PRINT / CN DOCUMENT STYLES
+   This file governs ONLY the printable Consignment Note.
+   It intentionally uses mm units and a fixed A4 canvas so the
+   layout never depends on screen size or browser zoom.
+   ============================================================ */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+.cn-page {
+  width: 210mm;
+  height: 297mm;
+  padding: 6mm 8mm;
+  box-sizing: border-box;
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-copy {
+  height: 133mm;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-cut-line {
+  border-top: 1px dashed #444;
+  height: 0;
+  margin: 2mm 0;
+}
+
+/* ---- Header ---- */
+
+.cn-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  margin-bottom: 2mm;
+}
+
+.cn-logo {
+  width: 28mm;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.cn-company-block {
+  flex: 1;
+}
+
+.cn-company-name {
+  font-weight: bold;
+  font-size: 10.5pt;
+}
+
+.cn-company-line {
+  font-size: 8pt;
+  line-height: 1.35;
+}
+
+.cn-title {
+  font-weight: bold;
+  font-size: 10.5pt;
+  text-decoration: underline;
+  margin-top: 1mm;
+}
+
+.cn-checks {
+  width: 34mm;
+  flex-shrink: 0;
+  font-size: 8pt;
+  text-align: left;
+}
+
+.cn-cn-number {
+  font-weight: bold;
+  font-size: 9pt;
+  margin-bottom: 1.5mm;
+  white-space: nowrap;
+}
+
+.cn-check-row {
+  white-space: nowrap;
+  margin-bottom: 0.5mm;
+}
+
+.cn-check-spacer {
+  margin-top: 2mm;
+}
+
+.cn-checkbox {
+  display: inline-block;
+  width: 3mm;
+  font-size: 9pt;
+}
+
+/* ---- Field table ---- */
+
+.cn-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  table-layout: fixed;
+}
+
+.cn-table td {
+  border: 0.3mm solid #000;
+  padding: 0.8mm 1.5mm;
+  vertical-align: top;
+}
+
+.cn-label {
+  font-weight: bold;
+  width: 20mm;
+  white-space: nowrap;
+}
+
+.cn-value {
+  width: 45mm;
+  word-break: break-word;
+}
+
+.cn-remarks-label {
+  height: 8mm;
+}
+
+.cn-remarks-value {
+  height: 8mm;
+}
+
+/* ---- Footer: issued by + driver details ---- */
+
+.cn-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2mm;
+  flex: 1;
+}
+
+.cn-issued-by {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 8.5pt;
+  font-weight: bold;
+  position: relative;
+  width: 40mm;
+}
+
+.cn-stamp {
+  width: 24mm;
+  height: auto;
+  opacity: 0.85;
+  margin-top: 1mm;
+}
+
+.cn-driver-details {
+  width: 60mm;
+  font-size: 8.5pt;
+}
+
+.cn-driver-title {
+  font-weight: bold;
+  margin-bottom: 1mm;
+}
+
+.cn-driver-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.2mm solid #000;
+  padding: 0.8mm 0;
+}
+
+.cn-driver-row span:first-child {
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 2mm;
+}
+
+.cn-fill {
+  flex: 1;
+  text-align: left;
+}
+
+/* ---- Screen preview of the print page ---- */
+
+.cn-preview-wrapper {
+  background: #888;
+  padding: 10mm 0;
+  display: flex;
+  justify-content: center;
+}
+
+.cn-preview-wrapper .cn-page {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Print rules: hide everything except the CN ---- */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .cn-print-area,
+  .cn-print-area * {
+    visibility: visible;
+  }
+
+  .cn-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .cn-preview-wrapper {
+    background: none;
+    padding: 0;
+  }
+
+  .cn-preview-wrapper .cn-page {
+    box-shadow: none;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
